@@ -4,9 +4,9 @@
     <title>Calculator</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
-    <script src="data.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="javascript/calculator-script.js"></script>
+    <script src="javascript/data.js"></script>
 </head>
 <body>
     <header class="global-header">
@@ -20,7 +20,44 @@
     </nav>
     <div id="wrapper">
         <main>
-            <h1>This is a main section</h1>
+            <h1>Calculator</h1>
+            <div id="denominator">
+                <h2>Formula</h2>
+                <form>
+                    <div>
+                        <h3>Step 1:</h3>
+                        <label for="flourWeight">Fill the amount of flour:</label>
+                        <input type="number" min="0" id="flourWeight">
+                        <button type="submit">Confirm</button>
+                    </div>
+                    <div>
+                        <h3>Step 2: </h3>
+                        <div>
+                            <div>
+                                <label for="ingredientName">Ingredient</label>
+                                <input type="text" id="ingredientName">
+                                <label for="ingredientWeight">Weight</label>
+                                <input type="number" min="0" id="ingredientWeight" oninput="validity.valid||(value='')">
+                                <button type="button" id="addIngredient">Add other ingredients</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <table id="ingredientsTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ingredient</th>
+                                <th scope="col">Metric</th>
+                                <th scope="col">Baker's %</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="calculator-ingredients">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </main>
     </div>
     <footer>
