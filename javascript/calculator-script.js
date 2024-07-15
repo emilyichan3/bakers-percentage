@@ -1,6 +1,6 @@
 const CALCULATOR_UNIT = 'g';
 const CALCULATOR_PERCENT ='%';
-var ingredientCount = 1;
+var ingredientCount = 0;
 
 function submitFlourWeight(event) {
   event.preventDefault();
@@ -11,9 +11,8 @@ function submitFlourWeight(event) {
     return;
   } else {
     addIngredientToTable('Flour', flourValue.value);
-  }
-
-  document.getElementById('addIngredient').addEventListener('click', addIngredient);
+    document.getElementById('addIngredient').addEventListener('click', addIngredient);
+  }  
 }
 
 function addIngredientToTable(item, value){
@@ -38,11 +37,13 @@ function addIngredientToTable(item, value){
 }
 
 function createDeleteButton() {
+  ingredientCount +=1;
   const deleteButton = document.createElement('button');
   deleteButton.type = 'button';
-  // deleteButton.classList.add('btn', 'btn-danger', 'ms-auto');
+  deleteButton.classList.add('btn','btn-danger');
+
   deleteButton.setAttribute('id', 'row'+ingredientCount);
-  deleteButton.innerText = 'Delete';
+  deleteButton.innerText = 'x';
   
   deleteButton.addEventListener('click', () => {
     removeIngredient(deleteButton);
@@ -56,8 +57,8 @@ function removeIngredient(button){
   console.log(number);
   let row = document.getElementById(number);
   row.remove();
-  // console.log(button);
 }
+
 function addIngredient(){
   let ingredientName = document.getElementById('ingredientName');
   let ingredientWeight = document.getElementById('ingredientWeight');
