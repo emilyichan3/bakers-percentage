@@ -1,6 +1,9 @@
 const CALCULATOR_UNIT = 'g';
 const CALCULATOR_PERCENT ='%';
+const CALCULATOR_FLOUR = 'Flour';
 var ingredientCount = 0;
+var flourBasePercentage = 1;
+var flourBaseWeight = 0;
 
 function submitFlourWeight(event) {
   event.preventDefault();
@@ -10,12 +13,15 @@ function submitFlourWeight(event) {
   if (flourValue.value === '') {
     return;
   } else {
-    addIngredientToTable('Flour', flourValue.value);
+    addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
+
     document.getElementById('addIngredient').addEventListener('click', addIngredient);
   }  
 }
 
 function addIngredientToTable(item, value){
+  ingredientCount +=1;
+  let rowId = 'row'+ingredientCount;
   let tbody = document.getElementById('calculator-ingredients');
   let nameTd = document.createElement('td');
   nameTd.innerText = item;
@@ -24,20 +30,24 @@ function addIngredientToTable(item, value){
   metricTd.innerText = value + CALCULATOR_UNIT;
   
   let percentageTd = document.createElement('td');
-  percentageTd.innerText = value + CALCULATOR_PERCENT;
+  let calculateResult = calculatePercentage(rowId, item, value, CALCULATOR_UNIT)
+  percentageTd.innerText = calculateResult + CALCULATOR_PERCENT;
 
   const deleteButton = createDeleteButton();
 
   let ingredientTr = document.createElement('tr');
-  ingredientTr.setAttribute('id', 'row'+ingredientCount);
+
+  ingredientTr.setAttribute('id', rowId);
   ingredientTr.append(nameTd, metricTd, percentageTd, deleteButton);
 
-
   tbody.appendChild(ingredientTr);
+
+  
+
 }
 
 function createDeleteButton() {
-  ingredientCount +=1;
+
   const deleteButton = document.createElement('button');
   deleteButton.type = 'button';
   deleteButton.classList.add('btn','btn-danger');
@@ -69,3 +79,18 @@ function addIngredient(){
 addEventListener('load', () => {
   document.querySelector('form').addEventListener('submit', submitFlourWeight);
 });
+
+function calculatePercentage(id, name, weight, unit){
+  if (name === CALCULATOR_FLOUR){
+      let flour = new Flour(id, name, weight, unit);
+      flourBasePercentage = flour.getPercetage();
+      flourBaseWeight = weight;
+      return flourBasePercentage;
+  } else {
+      let nonFlour = new NonFlour(id, name, weight, unit);
+      let nonFlourPercentage = nonFlour.getPercetage();
+      return nonFlourPercentage;
+  }
+}
+
+
