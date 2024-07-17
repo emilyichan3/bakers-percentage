@@ -26,14 +26,14 @@ function addIngredient(ingredientDetail){
     let nameTd = document.createElement('td');
     nameTd.innerText = ingredientDetail.name;
 
-    let metricTd = document.createElement('td');
-    metricTd.innerText = ingredientDetail.metric + ingredientDetail.unit;
+    let weightTd = document.createElement('td');
+    weightTd.innerText = ingredientDetail.weight + ingredientDetail.unit;
     
     let percentageTd = document.createElement('td');
     percentageTd.innerText = ingredientDetail.percentage + '%';
 
     let ingredientTr = document.createElement('tr');
-    ingredientTr.append(nameTd, metricTd, percentageTd);
+    ingredientTr.append(nameTd, weightTd, percentageTd);
 
     tbody.appendChild(ingredientTr);
 }
