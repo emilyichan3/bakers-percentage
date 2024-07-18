@@ -1,6 +1,9 @@
 const CALCULATOR_UNIT = 'g';
 const CALCULATOR_PERCENT ='%';
 const CALCULATOR_FLOUR = 'Flour';
+const ROW_ID_SAVE_BUTTON_START_WITH = 'saveButtonRow';
+const ROW_ID_EDIT_BUTTON_START_WITH = 'editButtonRow';
+const ROW_ID_DELETE_BUTTON_START_WITH = 'deleteButtonRow';
 var ingredientCount = 0;
 var flourBasePercentage = 1;
 var flourBaseWeight = 0;
@@ -14,7 +17,6 @@ function submitFlourWeight(event) {
     return;
   } else {
     addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
-
     document.getElementById('addIngredient').addEventListener('click', addIngredient);
   }  
 }
@@ -34,15 +36,17 @@ function addIngredientToTable(item, value){
   let calculateResult = calculatePercentage(rowId, item, value, CALCULATOR_UNIT)
   percentageTd.innerText = calculateResult + CALCULATOR_PERCENT;
 
+  let buttonDiv = document.createElement('div');
+  buttonDiv.classList.add('button-group');
   const saveButton = createSaveButton();
   const editButton = createEditButton();
   const deleteButton = createDeleteButton();
 
+  buttonDiv.append(saveButton, editButton, deleteButton); 
   let ingredientTr = document.createElement('tr');
 
   ingredientTr.setAttribute('id', rowId);
-  ingredientTr.append(nameTd, weightTd, percentageTd, saveButton, editButton, deleteButton);
-
+  ingredientTr.append(nameTd, weightTd, percentageTd, buttonDiv);
   tbody.appendChild(ingredientTr);
 
   
@@ -51,14 +55,16 @@ function addIngredientToTable(item, value){
 function createSaveButton() {
 
   const saveButton = document.createElement('button');
-  saveButton.type = 'button';
-  saveButton.classList.add('btn','btn-primary','save');
 
-  saveButton.setAttribute('id', 'saveButtonRow'+ingredientCount);
+  saveButton.type = 'button';
+  saveButton.classList.add('save-button', 'hidden');
+  saveButton.setAttribute('id', ROW_ID_SAVE_BUTTON_START_WITH+ingredientCount);
   saveButton.setAttribute('onclick', "return ValidateTextBox()");
 
   saveButton.innerText = 'save';
+
   saveButton.addEventListener('click', () => {
+    toggleButton(saveButton);
     saveIngredient(saveButton);
   });
 
@@ -73,16 +79,16 @@ function ValidateTextBox(textId) {
 };
 
 function createEditButton() {
-
   const editButton = document.createElement('button');
   editButton.type = 'button';
-  editButton.classList.add('btn','btn-info', 'edit');
+  editButton.classList.add('edit-button');
 
-  editButton.setAttribute('id', 'editButtonRow'+ingredientCount);
+  editButton.setAttribute('id', ROW_ID_EDIT_BUTTON_START_WITH+ingredientCount);
   editButton.innerText = 'edit';
   
   editButton.addEventListener('click', () => {
-     editIngredient(editButton);
+    toggleButton(editButton);
+    editIngredient(editButton);
   });  
   return editButton;
 }
@@ -117,9 +123,9 @@ function editIngredient(button){
 function createDeleteButton() {
   const deleteButton = document.createElement('button');
   deleteButton.type = 'button';
-  deleteButton.classList.add('btn','btn-danger');
+  deleteButton.classList.add('delete-button');
 
-  deleteButton.setAttribute('id', 'deleteButtonRow'+ingredientCount);
+  deleteButton.setAttribute('id', ROW_ID_DELETE_BUTTON_START_WITH+ingredientCount);
   deleteButton.innerText = 'x';
   
   deleteButton.addEventListener('click', () => {
@@ -127,6 +133,14 @@ function createDeleteButton() {
   });
 
   return deleteButton;
+}
+function toggleButton(button){
+  // user clicks the edit button, to hide the save button
+  // user clicks the save button, to hide the edit button
+  let editButtonId = ROW_ID_EDIT_BUTTON_START_WITH + (button.id).slice(13);
+  let saveButtonId = ROW_ID_SAVE_BUTTON_START_WITH + (button.id).slice(13);
+  document.getElementById(editButtonId).classList.toggle('hidden');
+  document.getElementById(saveButtonId).classList.toggle('hidden');
 }
 
 function removeIngredient(button){
