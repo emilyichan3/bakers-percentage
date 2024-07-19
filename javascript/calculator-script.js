@@ -17,7 +17,7 @@ function submitFlourWeight(event) {
     return;
   } else {
     addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
-    document.getElementById('addIngredient').addEventListener('click', addIngredient);
+    document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
   }  
 }
 
@@ -48,12 +48,9 @@ function addIngredientToTable(item, value){
   ingredientTr.setAttribute('id', rowId);
   ingredientTr.append(nameTd, weightTd, percentageTd, buttonDiv);
   tbody.appendChild(ingredientTr);
-
-  
-
 }
-function createSaveButton() {
 
+function createSaveButton() {
   const saveButton = document.createElement('button');
 
   saveButton.type = 'button';
@@ -70,13 +67,6 @@ function createSaveButton() {
 
   return saveButton;
 }
-
-function ValidateTextBox(textId) {
-  if (document.getElementById("txtName").value.trim() == "") {
-      alert("Please enter Name!");
-      return false;
-  }
-};
 
 function createEditButton() {
   const editButton = document.createElement('button');
@@ -98,8 +88,12 @@ function saveIngredient(button){
   console.log(rowNumber);
   let editable_weightId = 'editable_weightRow' + rowNumber;
   let weightId = 'weightRow' + rowNumber;
-  let weight_Data = document.getElementById(editable_weightId).value
-  document.getElementById(weightId).innerHTML = weight_Data;
+  let weight_Data = document.getElementById(editable_weightId).value;
+  if (isNumber(weight_Data)) {
+    document.getElementById(weightId).innerHTML = weight_Data;
+  } else {
+    alert("Please enter the current the weight");
+  } 
 }
 
 function editIngredient(button){
@@ -135,8 +129,8 @@ function createDeleteButton() {
   return deleteButton;
 }
 function toggleButton(button){
-  // user clicks the edit button, to hide the save button
-  // user clicks the save button, to hide the edit button
+  // when click the edit button, to hide the save button
+  // when click the save button, to hide the edit button
   let editButtonId = ROW_ID_EDIT_BUTTON_START_WITH + (button.id).slice(13);
   let saveButtonId = ROW_ID_SAVE_BUTTON_START_WITH + (button.id).slice(13);
   document.getElementById(editButtonId).classList.toggle('hidden');
@@ -153,9 +147,26 @@ function removeIngredient(button){
 function addIngredient(){
   let ingredientName = document.getElementById('ingredientName');
   let ingredientWeight = document.getElementById('ingredientWeight');
-  
-  addIngredientToTable(ingredientName.value, ingredientWeight.value);
+  if (ValidateIngredientName(ingredientName.value) === true){
+    if (isNumber(ingredientWeight.value)){
+      addIngredientToTable(ingredientName.value, ingredientWeight.value);
+    } else {
+      alert("Please enter the current the weight of "+ingredientName.value);
+    }
+  } else {
+    alert("Please enter the ingredient name!");
+  }
+
 }
+
+function isNumber(inputWeightValue) {
+    let numbers = /^[-+]?[0-9]+$/;
+    return (inputWeightValue.match(numbers));
+};
+
+function ValidateIngredientName(inputValue) {
+  return inputValue.trim() !== "";
+};
 
 addEventListener('load', () => {
   document.querySelector('form').addEventListener('submit', submitFlourWeight);
