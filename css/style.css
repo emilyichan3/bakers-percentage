@@ -122,7 +122,7 @@ footer p{
 }
 table {
     width: 100%;
-  }
+}
 
 table, tr, td, th{
     border: solid 1px;
@@ -142,12 +142,17 @@ table, tr, td, th{
 }
 .save-button {
     margin: 0 1px;
+    background-color: green;
+    width: 50px;
 }
 .edit-button {
     margin: 0 1px;
+    background-color: green;
+    width: 50px;
 }
 .delete-button {
     margin: 0 1px;
+    background-color: red;
 }
 .button-group {
     display: flex;
