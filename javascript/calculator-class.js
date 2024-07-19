@@ -20,11 +20,19 @@ class AbstractIngredient {
         this.isFlour = true;
         this.percentage = 0;
     }
-  
-    getPercetage(){
-        this.percentage = (this.weight / this.weight) * 100;
-        return this.percentage;
-    } 
+
+    setWeight(weight){
+        this.weight = weight;
+        this.percentage = this.calculatePercentage();
+    }
+
+    calculatePercentage() {
+        return (this.weight / this.weight) * 100;
+    }
+    // getPercetage(){
+    //     this.percentage = (this.weight / this.weight) * 100;
+    //     return this.percentage;
+    // } 
   }
   
   class NonFlour extends AbstractIngredient{
@@ -34,14 +42,28 @@ class AbstractIngredient {
         this.percentage = 0;
         this.flourBaseWeight = 0;
     }
-    get getPercetage() {
-        return this.percentage;
+
+    setWeight(weight){
+        this.weight = weight;
+        this.percentage = this.calculatePercentage();
     }
 
-    set getPercetage(flourWeight) {
-        this.flourBaseWeight = flourWeight;
-        this.percentage = Math.round((this.weight / this.flourBaseWeight) * 100);
+    setFlourWeight(weight){
+        this.flourBaseWeight = weight;
+        this.percentage = this.calculatePercentage();
     }
+
+    calculatePercentage() {
+        return (this.weight / this.flourBaseWeight) * 100;
+    }    
+    // get getPercetage() {
+    //     return this.percentage;
+    // }
+
+    // set getPercetage(flourWeight) {
+    //     this.flourBaseWeight = flourWeight;
+    //     this.percentage = Math.round((this.weight / this.flourBaseWeight) * 100);
+    // }
   }
   
   class Recipe {
@@ -67,9 +89,13 @@ class AbstractIngredient {
         let getCurrentRecord = this.recipe.filter(element => element.id === ingredientId);
         
         if (getCurrentRecord[0].isFlour === false){
-            getCurrentRecord[0].weight = weight;
-            getCurrentRecord[0].getPercetage = getFlourRecord[0].weight;
-            return getCurrentRecord[0].getPercetage;
-        }     
+            getCurrentRecord[0].setWeight(weight);
+            // getCurrentRecord[0].getPercetage = getFlourRecord[0].weight;
+            // getCurrentRecord[0].percentage = getFlourRecord[0].weight;
+            return getCurrentRecord[0].percentage;
+        } else {
+            //once the weight of flour been updated, need to update all percentage of items.
+
+        }  
     }
   }

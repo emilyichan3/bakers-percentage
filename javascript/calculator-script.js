@@ -200,14 +200,14 @@ function calculatePercentage(rowId, name, weight, unit){
   let weight_formatted = parseFloat(weight);
   if (name === CALCULATOR_FLOUR){
       let flour = new Flour(rowId, name, weight_formatted, unit);
-      flour.percentage = flour.getPercetage();
+      flour.setWeight(weight_formatted);
       flourBasePercentage = flour.percentage;
       flourBaseWeight = weight_formatted;
       customizedRecipe.addIngredient(flour);
       return flourBasePercentage;
   } else {
       let nonFlour = new NonFlour(rowId, name, weight_formatted, unit);
-      nonFlour.getPercetage = flourBaseWeight;
+      nonFlour.setFlourWeight(flourBaseWeight);
       let nonFlourPercentage = nonFlour.percentage;
       customizedRecipe.addIngredient(nonFlour);
       return nonFlourPercentage;
