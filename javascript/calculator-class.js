@@ -34,9 +34,6 @@ class AbstractIngredient {
         this.percentage = 0;
         this.flourBaseWeight = 0;
     }
-    // getPercetage(){
-    //     return Math.round((this.weight / this.flourBaseWeight) * 100);
-    // }
     get getPercetage() {
         return this.percentage;
     }
@@ -44,7 +41,6 @@ class AbstractIngredient {
     set getPercetage(flourWeight) {
         this.flourBaseWeight = flourWeight;
         this.percentage = Math.round((this.weight / this.flourBaseWeight) * 100);
-        
     }
   }
   
@@ -57,11 +53,23 @@ class AbstractIngredient {
         this.recipe.push(ingredient);
     }
   
-    deleteIngredient(ingredient){
-        this.recipe = this.recipe.filter(ingredient => id !== ingredient.id);
+    deleteIngredient(ingredientId) {
+        this.recipe = this.recipe.filter(element => element.id !== ingredientId);
     }
   
     toString(){
         return this.recipe.map(x => x.toString()).join("</br>");
+    }
+
+    updateIngredientWight(ingredientId, weight) {
+        let getFlourRecord = this.recipe.filter(element => element.isFlour === true);
+        console.log(getFlourRecord[0].weight);
+        let getCurrentRecord = this.recipe.filter(element => element.id === ingredientId);
+        
+        if (getCurrentRecord[0].isFlour === false){
+            getCurrentRecord[0].weight = weight;
+            getCurrentRecord[0].getPercetage = getFlourRecord[0].weight;
+            return getCurrentRecord[0].getPercetage;
+        }     
     }
   }

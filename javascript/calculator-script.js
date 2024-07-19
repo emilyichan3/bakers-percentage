@@ -13,7 +13,7 @@ var customizedRecipe;
 function submitFlourWeight(event) {
   event.preventDefault();
 
-  const flourValue = document.getElementById('flourWeight');
+  let flourValue = document.getElementById('flourWeight');
   customizedRecipe = new Recipe();
 
   if (flourValue.value === '') {
@@ -23,6 +23,7 @@ function submitFlourWeight(event) {
     document.getElementById('flour-input').classList.toggle('hidden');
     document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
     document.getElementById('ingredient-input').classList.toggle('hidden');
+   
   }  
 }
 
@@ -40,6 +41,7 @@ function addIngredientToTable(item, value){
   let percentageTd = document.createElement('td');
   let calculateResult = calculatePercentage(rowId, item, value, CALCULATOR_UNIT)
   percentageTd.innerText = calculateResult + CALCULATOR_PERCENT;
+  percentageTd.setAttribute('id', 'percentageRow'+ingredientCount);
 
   let buttonDiv = document.createElement('div');
   buttonDiv.classList.add('button-group');
@@ -56,6 +58,8 @@ function addIngredientToTable(item, value){
   ingredientTr.setAttribute('id', rowId);
   ingredientTr.append(nameTd, weightTd, percentageTd, buttonDiv);
   tbody.appendChild(ingredientTr);
+
+  document.getElementById('ingredientName').focus();
 }
 
 function createSaveButton() {
@@ -99,6 +103,7 @@ function saveIngredient(button){
   if (isNumber(weight_Data)) {
     if (parseFloat(weight_Data) >=0) {
       document.getElementById(weightId).innerHTML = weight_Data;
+      updatePercentage(rowNumber, parseFloat(weight_Data));
     } else {
       alert("Value must be greater than or equal to 0.");
     document.getElementById(weightId).innerHTML = current_weight_data;
@@ -157,8 +162,9 @@ function toggleButton(button){
 function removeIngredient(button){
   let rowId = (button.id).slice(12).toLowerCase() ;
   let row = document.getElementById(rowId);
+  console.log(rowId);
   row.remove();
-  customizedRecipe.removeIngredient(rowId);
+  customizedRecipe.deleteIngredient(rowId);
 }
 
 function addIngredient(){
@@ -191,15 +197,16 @@ addEventListener('load', () => {
 });
 
 function calculatePercentage(rowId, name, weight, unit){
+  let weight_formatted = parseFloat(weight);
   if (name === CALCULATOR_FLOUR){
-      let flour = new Flour(rowId, name, weight, unit);
+      let flour = new Flour(rowId, name, weight_formatted, unit);
       flour.percentage = flour.getPercetage();
       flourBasePercentage = flour.percentage;
-      flourBaseWeight = weight;
+      flourBaseWeight = weight_formatted;
       customizedRecipe.addIngredient(flour);
       return flourBasePercentage;
   } else {
-      let nonFlour = new NonFlour(rowId, name, weight, unit);
+      let nonFlour = new NonFlour(rowId, name, weight_formatted, unit);
       nonFlour.getPercetage = flourBaseWeight;
       let nonFlourPercentage = nonFlour.percentage;
       customizedRecipe.addIngredient(nonFlour);
@@ -207,8 +214,11 @@ function calculatePercentage(rowId, name, weight, unit){
   }
 }
 
-function updatePercentage(rowId){
-
+function updatePercentage(rowNumber, weight){
+  let currentPercentageId = 'percentageRow' + rowNumber;
+  let recalculate_Percentage = customizedRecipe.updateIngredientWight('row' + rowNumber, weight);
+  let currentPercentagaeValue = document.getElementById(currentPercentageId);
+  currentPercentagaeValue.innerHTML = recalculate_Percentage + CALCULATOR_PERCENT;
 }
 
 
