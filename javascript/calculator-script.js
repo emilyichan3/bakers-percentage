@@ -46,8 +46,11 @@ function addIngredientToTable(item, value){
   const saveButton = createSaveButton();
   const editButton = createEditButton();
   const deleteButton = createDeleteButton();
+  if (item === CALCULATOR_FLOUR){
+    deleteButton.classList.add('hidden', 'hiddenAlways');
+  }
+  buttonDiv.append(saveButton, editButton, deleteButton);
 
-  buttonDiv.append(saveButton, editButton, deleteButton); 
   let ingredientTr = document.createElement('tr');
 
   ingredientTr.setAttribute('id', rowId);
@@ -153,7 +156,6 @@ function toggleButton(button){
 
 function removeIngredient(button){
   let rowId = (button.id).slice(12).toLowerCase() ;
-  console.log(rowId);
   let row = document.getElementById(rowId);
   row.remove();
   customizedRecipe.removeIngredient(rowId);

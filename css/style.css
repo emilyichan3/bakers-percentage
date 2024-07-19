@@ -155,6 +155,9 @@ table, tr, td, th{
 .hidden {
     display: none;
 }
+.hiddenAlways {
+    display: none;
+}
 
 @media (min-width: 767px) {
     nav ul {
