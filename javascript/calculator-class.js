@@ -22,9 +22,9 @@ class AbstractIngredient {
     }
   
     getPercetage(){
-        return (this.weight / this.weight) * 100;
-    }
-  
+        this.percentage = (this.weight / this.weight) * 100;
+        return this.percentage;
+    } 
   }
   
   class NonFlour extends AbstractIngredient{
@@ -32,9 +32,19 @@ class AbstractIngredient {
         super(id, name, weight, unit);
         this.isFlour = false;
         this.percentage = 0;
+        this.flourBaseWeight = 0;
     }
-    getPercetage(){
-        return Math.round((this.weight / flourBaseWeight) * 100);
+    // getPercetage(){
+    //     return Math.round((this.weight / this.flourBaseWeight) * 100);
+    // }
+    get getPercetage() {
+        return this.percentage;
+    }
+
+    set getPercetage(flourWeight) {
+        this.flourBaseWeight = flourWeight;
+        this.percentage = Math.round((this.weight / this.flourBaseWeight) * 100);
+        
     }
   }
   
@@ -48,7 +58,7 @@ class AbstractIngredient {
     }
   
     deleteIngredient(ingredient){
-        this.recipe = this.recipe.filter(item => item !== ingredient);
+        this.recipe = this.recipe.filter(ingredient => id !== ingredient.id);
     }
   
     toString(){

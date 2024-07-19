@@ -8,17 +8,21 @@ var ingredientCount = 0;
 var flourBasePercentage = 1;
 var flourBaseWeight = 0;
 var current_weight_data  = 0;
+var customizedRecipe;
 
 function submitFlourWeight(event) {
   event.preventDefault();
 
   const flourValue = document.getElementById('flourWeight');
+  customizedRecipe = new Recipe();
 
   if (flourValue.value === '') {
     return;
   } else {
     addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
+    document.getElementById('flour-input').classList.toggle('hidden');
     document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
+    document.getElementById('ingredient-input').classList.toggle('hidden');
   }  
 }
 
@@ -152,6 +156,7 @@ function removeIngredient(button){
   console.log(rowId);
   let row = document.getElementById(rowId);
   row.remove();
+  customizedRecipe.removeIngredient(rowId);
 }
 
 function addIngredient(){
@@ -160,13 +165,14 @@ function addIngredient(){
   if (ValidateIngredientName(ingredientName.value) === true){
     if (isNumber(ingredientWeight.value)){
       addIngredientToTable(ingredientName.value, ingredientWeight.value);
+      ingredientName.value = "";
+      ingredientWeight.value = "";
     } else {
       alert("Please enter the current the weight of "+ingredientName.value);
     }
   } else {
     alert("Please enter the ingredient name");
   }
-
 }
 
 function isNumber(inputWeightValue) {
@@ -182,17 +188,25 @@ addEventListener('load', () => {
   document.querySelector('form').addEventListener('submit', submitFlourWeight);
 });
 
-function calculatePercentage(id, name, weight, unit){
+function calculatePercentage(rowId, name, weight, unit){
   if (name === CALCULATOR_FLOUR){
-      let flour = new Flour(id, name, weight, unit);
-      flourBasePercentage = flour.getPercetage();
+      let flour = new Flour(rowId, name, weight, unit);
+      flour.percentage = flour.getPercetage();
+      flourBasePercentage = flour.percentage;
       flourBaseWeight = weight;
+      customizedRecipe.addIngredient(flour);
       return flourBasePercentage;
   } else {
-      let nonFlour = new NonFlour(id, name, weight, unit);
-      let nonFlourPercentage = nonFlour.getPercetage();
+      let nonFlour = new NonFlour(rowId, name, weight, unit);
+      nonFlour.getPercetage = flourBaseWeight;
+      let nonFlourPercentage = nonFlour.percentage;
+      customizedRecipe.addIngredient(nonFlour);
       return nonFlourPercentage;
   }
+}
+
+function updatePercentage(rowId){
+
 }
 
 
