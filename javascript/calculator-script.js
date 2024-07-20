@@ -42,7 +42,7 @@ function addIngredientToTable(item, value){
   let calculateResult = calculatePercentage(rowId, item, value, CALCULATOR_UNIT)
   percentageTd.innerText = calculateResult + CALCULATOR_PERCENT;
   percentageTd.setAttribute('id', 'percentageRow'+ingredientCount);
-
+  let buttonTd = document.createElement('td');
   let buttonDiv = document.createElement('div');
   buttonDiv.classList.add('button-group');
   const saveButton = createSaveButton();
@@ -52,11 +52,11 @@ function addIngredientToTable(item, value){
     deleteButton.classList.add('hidden', 'hiddenAlways');
   }
   buttonDiv.append(saveButton, editButton, deleteButton);
-
+  buttonTd.append(buttonDiv);
   let ingredientTr = document.createElement('tr');
 
   ingredientTr.setAttribute('id', rowId);
-  ingredientTr.append(nameTd, weightTd, percentageTd, buttonDiv);
+  ingredientTr.append(nameTd, weightTd, percentageTd, buttonTd);
   tbody.appendChild(ingredientTr);
 
   document.getElementById('ingredientName').focus();
@@ -104,6 +104,16 @@ function saveIngredient(button){
     if (parseFloat(weight_Data) >=0) {
       document.getElementById(weightId).innerHTML = weight_Data;
       updatePercentage(rowNumber, parseFloat(weight_Data));
+
+      // document.querySelectorAll("td").forEach(para => {
+      //   const deleteBtn = document.createElement("button");
+      //   deleteBtn.textContent = "Delete";
+      //   para.appendChild(deleteBtn);
+      //   deleteBtn.addEventListener("click", function() {
+      //     para.remove();
+      //   });
+      // });
+
     } else {
       alert("Value must be greater than or equal to 0.");
     document.getElementById(weightId).innerHTML = current_weight_data;

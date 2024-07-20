@@ -29,10 +29,6 @@ class AbstractIngredient {
     calculatePercentage() {
         return (this.weight / this.weight) * 100;
     }
-    // getPercetage(){
-    //     this.percentage = (this.weight / this.weight) * 100;
-    //     return this.percentage;
-    // } 
   }
   
   class NonFlour extends AbstractIngredient{
@@ -56,14 +52,6 @@ class AbstractIngredient {
     calculatePercentage() {
         return (this.weight / this.flourBaseWeight) * 100;
     }    
-    // get getPercetage() {
-    //     return this.percentage;
-    // }
-
-    // set getPercetage(flourWeight) {
-    //     this.flourBaseWeight = flourWeight;
-    //     this.percentage = Math.round((this.weight / this.flourBaseWeight) * 100);
-    // }
   }
   
   class Recipe {
@@ -79,10 +67,6 @@ class AbstractIngredient {
         this.recipe = this.recipe.filter(element => element.id !== ingredientId);
     }
   
-    toString(){
-        return this.recipe.map(x => x.toString()).join("</br>");
-    }
-
     updateIngredientWight(ingredientId, weight) {
         let getFlourRecord = this.recipe.filter(element => element.isFlour === true);
         console.log(getFlourRecord[0].weight);
@@ -90,12 +74,19 @@ class AbstractIngredient {
         
         if (getCurrentRecord[0].isFlour === false){
             getCurrentRecord[0].setWeight(weight);
-            // getCurrentRecord[0].getPercetage = getFlourRecord[0].weight;
-            // getCurrentRecord[0].percentage = getFlourRecord[0].weight;
             return getCurrentRecord[0].percentage;
         } else {
             //once the weight of flour been updated, need to update all percentage of items.
-
+            let nonFlourArr = this.recipe.filter(x => x.isFlour === false);
+            getCurrentRecord[0].setWeight(weight);
+            this.updateAllIngredientsPercentage(nonFlourArr, weight);
+            return getCurrentRecord[0].percentage;
         }  
+    }
+
+    updateAllIngredientsPercentage(nonFlourIngredientsArr, flourWeight){
+        nonFlourIngredientsArr.forEach(x => {
+            x.setFlourWeight(flourWeight);
+            console.log(`${x.id} ${x.flourBaseWeight} ${x.name}`)});
     }
   }
