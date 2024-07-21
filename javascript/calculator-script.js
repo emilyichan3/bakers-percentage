@@ -19,14 +19,17 @@ function submitFlourWeight(event) {
   if (flourValue.value === '') {
     return;
   } else {
-    addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
-    document.getElementById('flour-input').classList.toggle('hidden');
-    document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
-    document.getElementById('ingredient-input').classList.toggle('hidden');
-   
+    
+    const getElement = document.getElementById("flour-input");
+    if (window.getComputedStyle(getElement).display !== "none"){
+      console.log('submit clicked');
+      addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
+      document.getElementById('flour-input').classList.toggle('hidden');
+      document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
+      document.getElementById('ingredient-input').classList.toggle('hidden');
+    }
   }  
 }
-
 function addIngredientToTable(item, value){
   ingredientCount +=1;
   let rowId = 'row'+ingredientCount;
@@ -58,8 +61,6 @@ function addIngredientToTable(item, value){
   ingredientTr.setAttribute('id', rowId);
   ingredientTr.append(nameTd, weightTd, percentageTd, buttonTd);
   tbody.appendChild(ingredientTr);
-
-  document.getElementById('ingredientName').focus();
 }
 
 function createSaveButton() {
@@ -172,10 +173,10 @@ function addIngredient(){
   let ingredientName = document.getElementById('ingredientName');
   let ingredientWeight = document.getElementById('ingredientWeight');
   if (ValidateIngredientName(ingredientName.value) === true){
-    if (isNumber(ingredientWeight.value)){
-      addIngredientToTable(ingredientName.value, ingredientWeight.value);
-      ingredientName.value = "";
-      ingredientWeight.value = "";
+    if ((isNumber(ingredientWeight.value)) && (parseFloat(ingredientWeight.value) >=0)) { 
+        addIngredientToTable(ingredientName.value, ingredientWeight.value);
+        ingredientName.value = "";
+        ingredientWeight.value = "";
     } else {
       alert("Please enter the current the weight of "+ingredientName.value);
     }
