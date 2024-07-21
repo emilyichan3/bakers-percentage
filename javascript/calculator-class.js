@@ -27,7 +27,7 @@ class AbstractIngredient {
     }
 
     calculatePercentage() {
-        return (this.weight / this.weight) * 100;
+        return 100;
     }
   }
   
@@ -50,43 +50,56 @@ class AbstractIngredient {
     }
 
     calculatePercentage() {
-        return (this.weight / this.flourBaseWeight) * 100;
+        if (this.flourBaseWeight !== 0){
+            return (this.weight / this.flourBaseWeight) * 100;
+        } else {
+            return 0; 
+        }        
     }    
   }
   
   class Recipe {
     constructor() {
-        this.recipe = [];
+        this.ingredients = [];
     }
   
     addIngredient(ingredient) {
-        this.recipe.push(ingredient);
+        this.ingredients.push(ingredient);
     }
   
     deleteIngredient(ingredientId) {
-        this.recipe = this.recipe.filter(element => element.id !== ingredientId);
+        this.ingredients = this.ingredients.filter(element => element.id !== ingredientId);
     }
   
-    updateIngredientWight(ingredientId, weight) {
-        let getFlourRecord = this.recipe.filter(element => element.isFlour === true);
-        console.log(getFlourRecord[0].weight);
-        let getCurrentRecord = this.recipe.filter(element => element.id === ingredientId);
+    updateIngredientWeight(ingredientId, weight) {
+        const flour = this.ingredients.find(element => element.isFlour);
+        const ingredient = this.ingredients.find(element => element.id === ingredientId);
         
-        if (getCurrentRecord[0].isFlour === false){
-            getCurrentRecord[0].setWeight(weight);
-            return getCurrentRecord[0].percentage;
-        } else {
-            //once the weight of flour been updated, need to update all percentage of items.
-            let nonFlourArr = this.recipe.filter(x => x.isFlour === false);
-            getCurrentRecord[0].setWeight(weight);
-            this.updateAllIngredientsPercentage(nonFlourArr, weight);
-            return getCurrentRecord[0].percentage;
-        }  
+        if (!ingredient) return;
+
+        if (!ingredient.isFlour && flour) {
+            ingredient.setWeight(weight);
+            ingredient.setFlourWeight(flour.weight);
+        } else if (ingredient.isFlour) {
+            ingredient.setWeight(weight);
+            this.updateAllNonFlourPercentages(weight);
+        }
     }
 
-    updateAllIngredientsPercentage(nonFlourIngredientsArr, flourWeight){
-        nonFlourIngredientsArr.forEach(x => {
-            x.setFlourWeight(flourWeight);
-            console.log(`${x.id} ${x.flourBaseWeight} ${x.name}`)});
+    updateAllNonFlourPercentages(flourWeight){
+        this.ingredients.forEach(ingredient => {
+            if (!ingredient.isFlour) {
+                ingredient.setFlourWeight(flourWeight);
+            }
+        });
     }
-  }
+
+    getIngredientPercent(ingredientId) {
+        return this.ingredients.find(ingredient => ingredient.id === ingredientId).percentage;
+    }
+
+    getNonFlourIngredients() {
+        return this.ingredients.filter(ingredient => !ingredient.isFlour);
+    }
+    
+}
