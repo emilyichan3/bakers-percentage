@@ -102,16 +102,16 @@ function saveIngredient(button){
   let weight_Data = document.getElementById(editable_weightId).value;
 
   if (isNumber(weight_Data)) {
-    if (parseFloat(weight_Data) >=0) {
+    if (parseFloat(weight_Data) > 0) {
       document.getElementById(weightId).innerHTML = weight_Data;
       updatePercentage(rowNumber, parseFloat(weight_Data));
       updateAllNonFlourPercentages();
     } else {
-      alert("Value must be greater than or equal to 0.");
+      alert("Weight must be greater than or equal to 1.");
       document.getElementById(weightId).innerHTML = current_weight_data;
     }
   } else {
-    alert("Please enter a number of the weight");
+    alert("Weight must be greater than or equal to 1.");
     document.getElementById(weightId).innerHTML = current_weight_data;
   } 
 }
@@ -125,7 +125,7 @@ function editIngredient(button){
 
   let editable_Cell = document.createElement('input');
   editable_Cell.setAttribute('type', 'number');
-  editable_Cell.setAttribute('min', 0);
+  editable_Cell.setAttribute('min', 1);
   editable_Cell.setAttribute('id', 'editable_'+weightId);
   editable_Cell.setAttribute('value', current_weight_data);
   editable_Cell.required = true;
@@ -173,12 +173,12 @@ function addIngredient(){
   let ingredientName = document.getElementById('ingredientName');
   let ingredientWeight = document.getElementById('ingredientWeight');
   if (ValidateIngredientName(ingredientName.value) === true){
-    if ((isNumber(ingredientWeight.value)) && (parseFloat(ingredientWeight.value) >=0)) { 
+    if ((isNumber(ingredientWeight.value)) && (parseFloat(ingredientWeight.value) > 0)) { 
         addIngredientToTable(ingredientName.value, ingredientWeight.value);
         ingredientName.value = "";
         ingredientWeight.value = "";
     } else {
-      alert("Please enter the current the weight of "+ingredientName.value);
+      alert("Weight must be greater than or equal to 1.");
     }
   } else {
     alert("Please enter the ingredient name");
