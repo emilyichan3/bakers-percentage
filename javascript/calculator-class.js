@@ -51,7 +51,15 @@ class AbstractIngredient {
 
     calculatePercentage() {
         if (this.flourBaseWeight !== 0){
-            return (this.weight / this.flourBaseWeight) * 100;
+            let oriPercertage = (this.weight / this.flourBaseWeight) * 100;
+            if ( oriPercertage !== Math.floor(oriPercertage)) {
+                // display 2 decimals if the percentage is not an integer.
+                return Number.parseFloat(oriPercertage).toFixed(2);
+            }
+            else
+            {
+                return oriPercertage;
+            }
         } else {
             return 0; 
         }        
