@@ -111,7 +111,7 @@ function saveIngredient(button){
       document.getElementById(weightId).innerHTML = current_weight_data;
     }
   } else {
-    alert("Weight must be greater than or equal to 1.");
+    alert("Weight must be a number and greater than or equal to 1.");
     document.getElementById(weightId).innerHTML = current_weight_data;
   } 
 }
@@ -178,7 +178,7 @@ function addIngredient(){
         ingredientName.value = "";
         ingredientWeight.value = "";
     } else {
-      alert("Weight must be greater than or equal to 1.");
+      alert("Weight must be a number and greater than or equal to 1.");
     }
   } else {
     alert("Please enter the ingredient name");
