@@ -23,30 +23,31 @@
     <div id="wrapper">
         <main>
             <h1>Calculator</h1>
-            <div>
-                <h2>Formula</h2>
-                <form>
-                    <div id="flour-input">
-                        <h3>Step 1:</h3>
-                        <label for="flourWeight">Enter the total weight of flour:</label>
-                        <input type="number" min="1" id="flourWeight">
-                        <button type="submit">Confirm</button>
-                    </div>
-                    <div id="ingredient-input" class="hidden">
-                        <h3>Step 2: </h3>
-                        <div>
+            <div id="target-section">
+                <div id="input-section">
+                    <form>
+                        <div id="flour-input">
+                            <h3>Step 1:</h3>
+                            <label for="flourWeight">Enter the total weight of flour:</label>
+                            <input type="number" min="1" id="flourWeight">
+                            <button type="submit">Confirm</button>
+                        </div>
+                        <div id="ingredient-input" class="hidden">
+                            <h3>Step 2:</h3>
                             <div>
-                                <label for="ingredientName">Ingredient</label>
-                                <input type="text" id="ingredientName">
-                                <label for="ingredientWeight">Weight(g)</label>
-                                <input type="number" id="ingredientWeight">
-                                <button type="button" id="addIngredientButton">Add other ingredients</button>
+                                <div>
+                                    <label for="ingredientName">Ingredient</label>
+                                    <input type="text" id="ingredientName">
+                                    <label for="ingredientWeight">Weight(g)</label>
+                                    <input type="number" id="ingredientWeight">
+                                    <button type="button" id="addIngredientButton">Add</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-                <div>
-                    <table id="ingredientsTable">
+                    </form>
+                </div>
+                <div id="output-section">
+                    <table id="ingredientsTable" class="hidden">
                         <thead>
                             <tr>
                                 <th scope="col">Ingredient</th>
@@ -59,6 +60,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div>
+                <button type="button">UP</button>
+                <button type="button">DOWN</button>
             </div>
         </main>
     </div>

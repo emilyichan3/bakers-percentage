@@ -109,5 +109,9 @@ class AbstractIngredient {
     getNonFlourIngredients() {
         return this.ingredients.filter(ingredient => !ingredient.isFlour);
     }
+
+    getFlourWeight() {
+        return this.ingredients.find(ingredient => ingredient.isFlour).weight;
+    }
     
 }

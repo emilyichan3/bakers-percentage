@@ -24,6 +24,7 @@ function submitFlourWeight(event) {
     if (window.getComputedStyle(getElement).display !== "none"){
       console.log('submit clicked');
       addIngredientToTable(CALCULATOR_FLOUR, flourValue.value);
+      document.getElementById('ingredientsTable').classList.toggle('hidden');
       document.getElementById('flour-input').classList.toggle('hidden');
       document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
       document.getElementById('ingredient-input').classList.toggle('hidden');
@@ -105,6 +106,7 @@ function saveIngredient(button){
     if (parseFloat(weight_Data) > 0) {
       document.getElementById(weightId).innerHTML = weight_Data;
       updatePercentage(rowNumber, parseFloat(weight_Data));
+      flourBaseWeight = customizedRecipe.getFlourWeight();
       updateAllNonFlourPercentages();
     } else {
       alert("Weight must be greater than or equal to 1.");
@@ -233,3 +235,15 @@ function updateAllNonFlourPercentages(){
   });
 }
 
+function outputElementLocation(location){
+  const targetElement = document.getElementById('target-section'); 
+  const inputElement = document.getElementById('input-section');
+  const outputElement = document.getElementById('output-section');
+  
+  if (location === 'DOWN') {
+    targetElement.insertBefore(inputElement, outputElement);
+  } else {
+    targetElement.insertBefore(outputElement, inputElement);
+  }
+  
+}
