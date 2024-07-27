@@ -178,6 +178,9 @@ table {
 table input {
     width: 100%;
 }
+.layoutButton {
+    background-color: #FFFF00;
+}
 @media (min-width: 767px) {
     nav ul {
         display: flex;

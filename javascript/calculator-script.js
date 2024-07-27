@@ -28,6 +28,8 @@ function submitFlourWeight(event) {
       document.getElementById('flour-input').classList.toggle('hidden');
       document.getElementById('addIngredientButton').addEventListener('click', addIngredient);
       document.getElementById('ingredient-input').classList.toggle('hidden');
+      document.getElementById('layout').classList.toggle('hidden');
+      document.getElementById('changeLayoutButton').addEventListener('click', changeLayout);
     }
   }  
 }
@@ -235,15 +237,24 @@ function updateAllNonFlourPercentages(){
   });
 }
 
-function outputElementLocation(location){
+function changeLayout(){
   const targetElement = document.getElementById('target-section'); 
   const inputElement = document.getElementById('input-section');
   const outputElement = document.getElementById('output-section');
   
-  if (location === 'DOWN') {
+  let previousElement = inputElement.previousElementSibling;
+  let stepContents = document.querySelectorAll('h3')
+  if (previousElement !== null) {
     targetElement.insertBefore(inputElement, outputElement);
+        // to show element <h3>Step 1, Step 2. 
+        for (const stepContent of stepContents) {
+          stepContent.style.display = 'block';
+        }
   } else {
     targetElement.insertBefore(outputElement, inputElement);
+    // to hide element <h3>Step 1, Step 2. 
+    for (const stepContent of stepContents) {
+      stepContent.style.display = 'none';
+    }
   }
-  
 }
