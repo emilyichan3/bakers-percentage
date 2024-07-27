@@ -12,7 +12,7 @@ body{
     font-size: 16px;
     line-height: 1.4;
     background-color: var(--main-bg-color);
-    min-width: 265px;
+    min-width: 350px;
 }
 
 #wrapper{
@@ -122,6 +122,7 @@ footer p{
 }
 table {
     width: 100%;
+    table-layout: fixed;
 }
 
 table, tr, td, th{
@@ -135,6 +136,7 @@ table, tr, td, th{
 .main-content img {
     width: 100%;
 }
+
 .cropped-center-img {
     object-fit: cover;
     object-position: 50% 50%;
@@ -164,6 +166,18 @@ table, tr, td, th{
     display: none;
 }
 
+form {
+    margin: 5px 0;
+}
+form input{
+    width: 150px;
+}
+table {
+    margin: 5px 0;
+}
+table input {
+    width: 100%;
+}
 @media (min-width: 767px) {
     nav ul {
         display: flex;
