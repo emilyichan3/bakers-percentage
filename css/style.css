@@ -1,20 +1,18 @@
-:root {
+/* :root {
     --main-bg-color: #fdf9f3;
-}
+} */
 
 * {
     box-sizing: border-box;
     margin: 0;
 }
-
 body{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     line-height: 1.4;
-    background-color: var(--main-bg-color);
+    /* background-color: var(--main-bg-color); */
     min-width: 350px;
 }
-
 #wrapper{
     width: 100%;
     padding: 0.5em 0;
@@ -31,7 +29,7 @@ header{
 }
 .global-header {
     display: flex;
-    position: sticky;
+    position: relative;
     width: 100%;
     left: 0;
     top: 0;
@@ -123,6 +121,7 @@ footer p{
 table {
     width: 100%;
     table-layout: fixed;
+    margin: 5px 0;
 }
 
 table, tr, td, th{
@@ -130,6 +129,10 @@ table, tr, td, th{
     border-collapse: collapse;
     padding: 10px 5px;
 }
+table input {
+    width: 100%;
+}
+
 .main-content div{
     width: 100%;
 }
@@ -142,19 +145,26 @@ table, tr, td, th{
     object-position: 50% 50%;
     height: 200px;
 }
+button {
+    text-decoration-color: #eeeeee;
+    height: 30px;
+}
 .save-button {
     margin: 0 1px;
     background-color: green;
     width: 50px;
+    color: white;
 }
 .edit-button {
     margin: 0 1px;
     background-color: green;
     width: 50px;
+    color: white;
 }
 .delete-button {
     margin: 0 1px;
     background-color: red;
+    color: white;
 }
 .button-group {
     display: flex;
@@ -171,16 +181,17 @@ form {
 }
 form input{
     width: 150px;
-}
-table {
     margin: 5px 0;
 }
-table input {
-    width: 100%;
+input {
+    height: 30px; 
+    background-color: #fff3cd;
 }
+
 .layoutButton {
-    background-color: #FFFF00;
+    background-color: #eeeeee;
 }
+
 @media (min-width: 767px) {
     nav ul {
         display: flex;

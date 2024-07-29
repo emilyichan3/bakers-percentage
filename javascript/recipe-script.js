@@ -27,7 +27,7 @@ function addIngredient(ingredientDetail){
     nameTd.innerText = ingredientDetail.name;
 
     let weightTd = document.createElement('td');
-    weightTd.innerText = ingredientDetail.weight + ingredientDetail.unit;
+    weightTd.innerText = ingredientDetail.weight;
     
     let percentageTd = document.createElement('td');
     percentageTd.innerText = ingredientDetail.percentage + '%';
