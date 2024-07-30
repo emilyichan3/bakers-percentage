@@ -132,7 +132,11 @@ table, tr, td, th{
 table input {
     width: 100%;
 }
-
+.input_layout {
+    table-layout:fixed;
+    border: none;
+    width: 500px;
+}
 .main-content div{
     width: 100%;
 }
@@ -221,7 +225,9 @@ input {
     .cropped-center-img {
         height: 300px;
     }
-    
+    .input_layout {
+        width: 60%;
+    }
 }
 @media (min-width: 992px) {
     .global-header {

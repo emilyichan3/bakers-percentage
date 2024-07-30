@@ -28,19 +28,47 @@
                     <form>
                         <div id="flour-input">
                             <h3>Step 1:</h3>
-                            <label for="flourWeight">Enter the total weight of flour:</label>
-                            <input type="number" min="1" id="flourWeight">
-                            <button type="submit">Confirm</button>
+                            <table class="input_layout">
+                                <tbody>
+                                    <tr>
+                                        <td><label for="flourWeight">Enter the weight(g) of flour:</label></td>
+                                        <td><input type="number" min="1" id="flourWeight"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button type="submit">Confirm</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- <label for="flourWeight">Enter the weight(g) of flour:</label>
+                            <input type="number" min="1" id="flourWeight"> -->
+                            <!-- <button type="submit">Confirm</button> -->
                         </div>
                         <div id="ingredient-input" class="hidden">
                             <h3>Step 2:</h3>
                             <div>
+                                <table class="input_layout">
+                                    <tbody>
+                                        <tr>
+                                            <td><label for="ingredientName">Enter the ingredient's name:</label></td>
+                                            <td><input type="text" id="ingredientName"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="ingredientWeight">Enter the ingredient's weight(g)</label></td>
+                                            <td><input type="number" id="ingredientWeight"></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><button type="button" id="addIngredientButton">Add</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <div>
-                                    <label for="ingredientName">Ingredient</label>
-                                    <input type="text" id="ingredientName">
-                                    <label for="ingredientWeight">Weight(g)</label>
-                                    <input type="number" id="ingredientWeight">
-                                    <button type="button" id="addIngredientButton">Add</button>
+                                    <!-- <label for="ingredientName">Enter the name of ingredient:</label>
+                                    <input type="text" id="ingredientName"> -->
+                                    <!-- <label for="ingredientWeight">Enter the weight(g)</label>
+                                    <input type="number" id="ingredientWeight"> -->
+                                    <!-- <button type="button" id="addIngredientButton">Add</button> -->
                                 </div>
                             </div>
                         </div>
