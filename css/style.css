@@ -334,4 +334,7 @@ input {
     .TableWrap {
         overflow: auto;
     }
+    .input-layout{
+        width: 767px ;
+    }
 }
