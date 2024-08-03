@@ -81,6 +81,7 @@ footer a{
 footer p{
     padding: 0;
 }
+
 .page-active{
     background-color: #4a6e59;
 }
@@ -118,19 +119,71 @@ footer p{
     padding-bottom: 10px;
     box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
 }
-table {
+.CalculateTable { 
     width: 100%;
+    overflow:hidden; 
+}
+.CalculateTable .TableWrap{ 
+    display: table;
     table-layout: fixed;
-    margin: 5px 0;
+    width: 100%;
+}
+.CalculateTable td {
+    vertical-align: top;
+    line-height: 150%;
+    text-align: left;
+    padding:1px 0;
+}
+.CalculateTable td button{
+    width: 100%;
+    background-color: #08ce7b;
+}
+.CalculateTable td input{
+    width: 100%;
+    background-color: #eeeeee;
+}
+.CalculateTable table {
+    /* margin: 0 10px; */
+    padding: 0 0 0.1em;
+    width: 100%;
 }
 
-table, tr, td, th{
-    border: solid 1px;
-    border-collapse: collapse;
-    padding: 10px 5px;
-}
-table input {
+.IngredientTable { 
+    margin: 2em 0;
     width: 100%;
+}
+.IngredientTable table {
+    width: 100%;
+    table-layout: fixed;
+    overflow: hidden;
+}
+.IngredientTable .TableWrap{ 
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.IngredientTable th {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.IngredientTable td {
+    vertical-align: top;
+    line-height: 150%;
+    text-align: left;
+    margin: 0.1em 0 0.1em;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+
+.IngredientTable td input{
+    width: 100%;
+    background-color: #eeeeee;
+}
+#recipe-title {
+    font-size: xx-large;
+}
+#info {
+    background-color: rgba(181, 223, 195, 0.39)
 }
 .input_layout {
     table-layout:fixed;
@@ -154,20 +207,22 @@ button {
     height: 30px;
 }
 .save-button {
-    margin: 0 1px;
-    background-color: green;
-    width: 50px;
-    color: white;
+    padding: 0 1px;
+    background-color: rgb(2, 90, 2);
+    width: 60px;
+    color: white;    
 }
 .edit-button {
-    margin: 0 1px;
-    background-color: green;
-    width: 50px;
+    padding: 0 1px;
+    background-color: rgb(2, 90, 2);
+    width: 60px;
     color: white;
 }
 .delete-button {
-    margin: 0 1px;
-    background-color: red;
+    margin: 0 0.1em;
+    padding: 0;
+    background-color: rgb(114, 5, 5);
+    width: 30px;
     color: white;
 }
 .button-group {
@@ -192,8 +247,8 @@ input {
     background-color: #fff3cd;
 }
 
-.layoutButton {
-    background-color: #eeeeee;
+.settingButton {
+    background-color: rgba(181, 223, 195, 0.39);
 }
 
 @media (min-width: 767px) {
@@ -227,6 +282,12 @@ input {
     }
     .input_layout {
         width: 60%;
+    }
+    .TableWrap {
+        overflow: auto;
+    }
+    .input-layout{
+        width: 767px ;
     }
 }
 @media (min-width: 992px) {
@@ -266,5 +327,7 @@ input {
     .cropped-center-img {
         height: 500px;
     }
-
+    .TableWrap {
+        overflow: auto;
+    }
 }

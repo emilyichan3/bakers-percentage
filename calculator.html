@@ -24,73 +24,75 @@
         <main>
             <h1>Calculator</h1>
             <div id="target-section">
-                <div id="input-section">
+                <div id="input-section" class="input-layout">
                     <form>
                         <div id="flour-input">
                             <h3>Step 1:</h3>
-                            <table class="input_layout">
-                                <tbody>
-                                    <tr>
-                                        <td><label for="flourWeight">Enter the weight(g) of flour:</label></td>
-                                        <td><input type="number" min="1" id="flourWeight"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><button type="submit">Confirm</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- <label for="flourWeight">Enter the weight(g) of flour:</label>
-                            <input type="number" min="1" id="flourWeight"> -->
-                            <!-- <button type="submit">Confirm</button> -->
+                            <h6>(Please fill up below field)</h6>
+                            <div class="CalculateTable">
+                                <div class="TableWrap">
+                                    <table class="input_layout">
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="flourWeight">The weight(g) of flour:</label></td>
+                                                <td><input type="number" min="1" id="flourWeight"></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><button type="submit">Confirm</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div id="ingredient-input" class="hidden">
                             <h3>Step 2:</h3>
-                            <div>
-                                <table class="input_layout">
-                                    <tbody>
-                                        <tr>
-                                            <td><label for="ingredientName">Enter the ingredient's name:</label></td>
-                                            <td><input type="text" id="ingredientName"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="ingredientWeight">Enter the ingredient's weight(g)</label></td>
-                                            <td><input type="number" id="ingredientWeight"></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td><button type="button" id="addIngredientButton">Add</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div>
-                                    <!-- <label for="ingredientName">Enter the name of ingredient:</label>
-                                    <input type="text" id="ingredientName"> -->
-                                    <!-- <label for="ingredientWeight">Enter the weight(g)</label>
-                                    <input type="number" id="ingredientWeight"> -->
-                                    <!-- <button type="button" id="addIngredientButton">Add</button> -->
+                            <h6>(Please fill up below fields)</h6>
+                            <div class="CalculateTable">
+                                <div class="TableWrap">
+                                    <table class="input_layout">
+                                        <tbody>
+                                            <tr>
+                                                <td><label for="ingredientName">Ingredient's name:</label></td>
+                                                <td><input type="text" id="ingredientName"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="ingredientWeight">Ingredient's weight(g)</label></td>
+                                                <td><input type="number" id="ingredientWeight"></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><button type="button" id="addIngredientButton">Add</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div id="output-section">
-                    <table id="ingredientsTable" class="hidden">
-                        <thead>
-                            <tr>
-                                <th scope="col">Ingredient</th>
-                                <th scope="col">Weight(g)</th>
-                                <th scope="col">Baker's %</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="calculator-ingredients">
-                        </tbody>
-                    </table>
+                    <div class="IngredientTable">
+                        <div class="TableWrap">
+                            <table id="ingredientsTable" class="hidden">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Ingredient</th>
+                                        <th scope="col">Weight(g)</th>
+                                        <th scope="col">Baker's %</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calculator-ingredients">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="layout" class="hidden">
-                <button type="button" id="changeLayoutButton" class="layoutButton">Move recipe to the top</button>
+                <button type="button" id="changeLayoutButton" class="settingButton">Switch display order</button>
             </div>
         </main>
     </div>
