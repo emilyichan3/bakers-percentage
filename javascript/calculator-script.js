@@ -252,7 +252,6 @@ function changeLayout(){
         document.get
   } else {
     targetElement.insertBefore(outputElement, inputElement);
-    // document.getElementById('changeLayoutButton').innerText = 'Move recipe to the bottom';
     // to hide element <h3>Step 1, Step 2. 
     for (const stepContent of stepContents) {
       stepContent.style.display = 'none';
