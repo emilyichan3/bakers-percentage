@@ -82,12 +82,15 @@ footer {
     font-size: 80%;
     text-align: center;
     padding: 0.5em 0;
+
 }
 footer a{
     color: #FFFF00;
 }
 footer p{
     padding: 0;
+    margin: 0;
+    line-height: 150%;
 }
 
 .page-active{
@@ -151,7 +154,6 @@ footer p{
     background-color: #eeeeee;
 }
 .CalculateTable table {
-    /* margin: 0 10px; */
     padding: 0 0 0.1em;
     width: 100%;
 }
@@ -188,7 +190,9 @@ footer p{
     background-color: #eeeeee;
 }
 #recipe-title {
-    font-size: xx-large;
+    font-size: 32px;
+    font-weight: bold;
+    color: #585656;
 }
 #info {
     background-color: rgba(181, 223, 195, 0.39)
@@ -211,8 +215,9 @@ footer p{
     height: 200px;
 }
 button {
-    text-decoration-color: #eeeeee;
-    height: 30px;
+    height: 35px;
+    line-height: 150%;
+
 }
 .save-button {
     padding: 0 1px;
@@ -254,7 +259,6 @@ input {
     height: 30px; 
     background-color: #fff3cd;
 }
-
 .settingButton {
     background-color: rgba(181, 223, 195, 0.39);
 }
@@ -265,21 +269,6 @@ input {
 }
 
 @media (min-width: 767px) {
-    nav ul {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: start;
-        border-top: unset;
-    }
-    nav li {
-        border-bottom: none;
-        padding: 0;
-        font-size: 18px;
-    }    
-    nav li a {
-        width: 120px;
-        padding: 10px;
-    }
     #wrapper {
         font-size: 18px;
     }
@@ -292,9 +281,6 @@ input {
     }
     .cropped-center-img {
         height: 300px;
-    }
-    .input_layout {
-        width: 60%;
     }
     .TableWrap {
         overflow: auto;
@@ -310,20 +296,9 @@ input {
         width: 970px;
     }
     nav ul {
-        display: flex;
-        flex-flow: row nowrap;
         justify-content: left;
         margin: 0 auto;
         width: 970px;
-    }
-    nav li {
-        border-bottom: none;
-        padding: 0;
-        font-size: 18px;
-    }    
-    nav li a {
-        width: 120px;
-        padding: 10px;
     }
     #wrapper {
         margin: 0 auto;
